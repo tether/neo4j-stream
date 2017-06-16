@@ -26,6 +26,9 @@ module.exports = function (driver) {
         onCompleted() {
           stream.push(null)
           session.close()
+        },
+        onError(error) {
+          stream.emit('error', new Error(error))
         }
       })
     return stream

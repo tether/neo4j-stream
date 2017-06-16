@@ -7,7 +7,7 @@ const test = require('tape')
 const stream = require('..')
 
 
-test('should create a session to run statatement', assert => {
+test('should create a session to run statement', assert => {
   assert.plan(1)
   const cypher = stream({
     session () {
@@ -15,4 +15,19 @@ test('should create a session to run statatement', assert => {
     }
   })
   cypher`MATCH (n) RETURN n`
+})
+
+test('should run a session statement', assert => {
+  assert.plan(1)
+  const statement = `MATCH (n) RETURN n`
+  const cypher = stream({
+    session () {
+      return {
+        run(str) {
+          assert.ok(str === statement, 'run statement')    
+        }
+      }
+    }
+  })
+  cypher`${statement}`
 })

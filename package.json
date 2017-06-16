@@ -1,6 +1,6 @@
 {
   "name": "neo4j-stream",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,6 +11,9 @@
     "url": "git+https://github.com/tether/neo4j-stream.git"
   },
   "keywords": [
+    "neo4j",
+    "cypher",
+    "stream",
     "tether"
   ],
   "author": "Petrofeed Inc",

@@ -14,6 +14,13 @@ test('should create a session to run statement', assert => {
       assert.ok(true, 'session created')
       return {
         run() {
+          return {
+            subscribe() {
+
+            }
+          }
+        },
+        close() {
 
         }
       }
@@ -29,8 +36,12 @@ test('should run a session statement', assert => {
     session () {
       return {
         run(str) {
-          console.log('str', str)
           assert.ok(str === statement, 'run statement')
+          return {
+            subscribe() {
+
+            }
+          }
         }
       }
     }
@@ -38,13 +49,20 @@ test('should run a session statement', assert => {
   cypher`${statement}`
 })
 
+
 test('should close session once statement is completed', assert => {
   assert.plan(1)
   const cypher = stream({
     session () {
       return {
         run() {
-
+          return {
+            subscribe(obj) {
+              setTimeout(() => {
+                obj.onCompleted()
+              }, 500)
+            }
+          }
         },
 
         close() {

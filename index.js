@@ -8,7 +8,13 @@
 module.exports = function (driver) {
   const session = driver.session()
   return (chunks, ...data) => {
-    session.run(compose(chunks, data))
+    session
+      .run(compose(chunks, data))
+      .subscribe({
+        onCompleted() {
+          session.close()
+        }
+      })
   }
 }
 

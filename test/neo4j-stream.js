@@ -145,3 +145,26 @@ test('should stream statement results', assert => {
 //     assert.equal(error, 'fail!')
 //   })
 // })
+
+
+test('should serialize cypher properties automatically', assert => {
+  assert.plan(1)
+  const properties = {
+    name: 'foo'
+  }
+  const cypher = stream({
+    session () {
+      return {
+        run(str) {
+          assert.equal(str, 'MATCH (n:PEOPLE {name: "foo"}) RETURN n')
+          return {
+            subscribe() {
+
+            }
+          }
+        }
+      }
+    }
+  })
+  cypher`MATCH (n:PEOPLE ${properties}) RETURN n`
+})

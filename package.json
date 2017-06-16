@@ -24,6 +24,7 @@
     "tape": "*"
   },
   "dependencies": {
+    "json-to-cypher": "^1.0.0",
     "readable-stream": "^2.2.11"
   }
 }

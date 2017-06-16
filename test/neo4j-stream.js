@@ -5,6 +5,7 @@
 
 const test = require('tape')
 const stream = require('..')
+const concat = require('concat-stream')
 
 
 test('should create a session to run statement', assert => {
@@ -92,4 +93,33 @@ test('should return a readable stream', assert => {
   assert.equal(typeof result.on, 'function')
   assert.equal(typeof result.pipe, 'function')
   assert.equal(result.readable, true)
+})
+
+test('should stream statement results', assert => {
+  assert.plan(1)
+  const cypher = stream({
+    session () {
+      return {
+        run() {
+          return {
+            subscribe(obj) {
+              setTimeout(() => {
+                obj.onNext('hello ')
+                setTimeout(() => {
+                  obj.onNext('world')
+                  obj.onCompleted()
+                }, 500)
+              }, 500)
+            }
+          }
+        },
+
+        close() {}
+      }
+    }
+  })
+  cypher`MATCH (n) RETURN n`
+    .pipe(concat(data => {
+      assert.equal(data, 'hello world')
+    }))
 })

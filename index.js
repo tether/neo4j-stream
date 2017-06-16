@@ -16,10 +16,15 @@ module.exports = function (driver) {
     const stream = Readable({
       objectMode: true
     })
+    stream._read = () => {}
     session
       .run(compose(chunks, data))
       .subscribe({
+        onNext(record) {
+          stream.push(record)
+        },
         onCompleted() {
+          stream.push(null)
           session.close()
         }
       })

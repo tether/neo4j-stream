@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/tether/neo4j-stream#readme",
   "devDependencies": {
+    "concat-stream": "^1.6.0",
     "tape": "*"
   },
   "dependencies": {

@@ -12,6 +12,11 @@ test('should create a session to run statement', assert => {
   const cypher = stream({
     session () {
       assert.ok(true, 'session created')
+      return {
+        run() {
+
+        }
+      }
     }
   })
   cypher`MATCH (n) RETURN n`
@@ -24,7 +29,8 @@ test('should run a session statement', assert => {
     session () {
       return {
         run(str) {
-          assert.ok(str === statement, 'run statement')    
+          console.log('str', str)
+          assert.ok(str === statement, 'run statement')
         }
       }
     }

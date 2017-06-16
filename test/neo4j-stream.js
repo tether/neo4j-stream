@@ -4,10 +4,15 @@
  */
 
 const test = require('tape')
+const stream = require('..')
 
-test('this is an example', assert => {
+
+test('should create a session to run statatement', assert => {
   assert.plan(1)
-  assert.equal(1 + 2, 3)
+  const cypher = stream({
+    session () {
+      assert.ok()
+    }
+  })
+  cypher`MATCH (n) RETURN n`
 })
-
-  

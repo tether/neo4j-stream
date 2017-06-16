@@ -73,3 +73,23 @@ test('should close session once statement is completed', assert => {
   })
   cypher`MATCH (n) RETURN n`
 })
+
+test('should return a readable stream', assert => {
+  assert.plan(3)
+  const cypher = stream({
+    session () {
+      return {
+        run() {
+          return {
+            subscribe() {}
+          }
+        },
+        close() {}
+      }
+    }
+  })
+  const result = cypher`MATCH (n) RETURN n`
+  assert.equal(typeof result.on, 'function')
+  assert.equal(typeof result.pipe, 'function')
+  assert.equal(result.readable, true)
+})

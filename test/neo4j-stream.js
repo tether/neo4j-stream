@@ -37,3 +37,21 @@ test('should run a session statement', assert => {
   })
   cypher`${statement}`
 })
+
+test('should close session once statement is completed', assert => {
+  assert.plan(1)
+  const cypher = stream({
+    session () {
+      return {
+        run() {
+
+        },
+
+        close() {
+          assert.ok(true, 'session closed')
+        }
+      }
+    }
+  })
+  cypher`MATCH (n) RETURN n`
+})

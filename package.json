@@ -16,7 +16,7 @@
     "stream",
     "tether"
   ],
-  "author": "Petrofeed Inc",
+  "author": "Olivier Wietrich",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tether/neo4j-stream/issues"

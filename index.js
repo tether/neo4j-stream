@@ -3,6 +3,8 @@
  */
 
 const Readable = require('readable-stream').Readable
+const serialize = require('json-to-cypher')
+
 
 /**
  * This is a simple description.
@@ -40,7 +42,9 @@ function compose (chunks, data) {
   let result = ''
   data.map((item, idx) => {
     result += chunks[idx]
-    result += item
+    result += typeof item === 'object'
+      ? serialize(item)
+      : item
   })
   result += chunks.slice(-1)
   return result

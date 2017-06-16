@@ -156,7 +156,7 @@ test('should serialize cypher properties automatically', assert => {
     session () {
       return {
         run(str) {
-          assert.equal(str, 'MATCH (n:PEOPLE {name: "foo"}) RETURN n')
+          assert.equal(str, 'MATCH (n:PEOPLE {name:"foo"}) RETURN n')
           return {
             subscribe() {
 

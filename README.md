@@ -5,7 +5,7 @@
 [![Downloads](https://img.shields.io/npm/dm/neo4j-stream.svg)](http://npm-stat.com/charts.html?package=neo4j-stream)
 [![guidelines](https://tether.github.io/contribution-guide/badge-guidelines.svg)](https://github.com/tether/contribution-guide)
 
-Create a readable stream from a cypher query. This module should be used with the official [neo4j javascript driver](https://github.com/neo4j/neo4j-javascript-driver).
+Create a readable stream from records returned by cypher query.
 
 ## Usage
 
@@ -18,6 +18,8 @@ cypher`
   RETURN people
 `.pipe(dest)
 ```
+
+A session should be created from the official [neo4j javascript driver](https://github.com/neo4j/neo4j-javascript-driver).
 
 ## Installation
 

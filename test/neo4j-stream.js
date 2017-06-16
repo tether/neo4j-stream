@@ -123,3 +123,26 @@ test('should stream statement results', assert => {
       assert.equal(data, 'hello world')
     }))
 })
+
+test('should emit error on session error', assert => {
+  assert.plan(1)
+  const cypher = stream({
+    session () {
+      return {
+        run() {
+          return {
+            subscribe(obj) {
+              obj.onError(new Error('fail!'))
+            }
+          }
+        },
+
+        close() {}
+      }
+    }
+  })
+  cypher`MATCH (n) RETURN n`
+    .on('error', (error) => {
+      assert.equal(error, 'fail!')
+    })
+})

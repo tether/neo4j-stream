@@ -1,4 +1,3 @@
-
 {
   "name": "neo4j-stream",
   "version": "1.0.0",
@@ -22,6 +21,8 @@
   "homepage": "https://github.com/tether/neo4j-stream#readme",
   "devDependencies": {
     "tape": "*"
+  },
+  "dependencies": {
+    "readable-stream": "^2.2.11"
   }
 }
-  

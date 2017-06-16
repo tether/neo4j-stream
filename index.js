@@ -1,3 +1,8 @@
+/**
+ * Dependencies.
+ */
+
+const Readable = require('readable-stream').Readable
 
 /**
  * This is a simple description.
@@ -8,6 +13,9 @@
 module.exports = function (driver) {
   const session = driver.session()
   return (chunks, ...data) => {
+    const stream = Readable({
+      objectMode: true
+    })
     session
       .run(compose(chunks, data))
       .subscribe({
@@ -15,6 +23,7 @@ module.exports = function (driver) {
           session.close()
         }
       })
+    return stream
   }
 }
 

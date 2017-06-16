@@ -1,6 +1,6 @@
 # Neo4j-Stream
 
-[![Build Status](https://travis-ci.org/petrofeed/neo4j-stream.svg?branch=master)](https://travis-ci.org/petrofeed/neo4j-stream)
+[![Build Status](https://travis-ci.org/tether/neo4j-stream.svg?branch=master)](https://travis-ci.org/tether/neo4j-stream)
 [![NPM](https://img.shields.io/npm/v/neo4j-stream.svg)](https://www.npmjs.com/package/neo4j-stream)
 [![Downloads](https://img.shields.io/npm/dm/neo4j-stream.svg)](http://npm-stat.com/charts.html?package=neo4j-stream)
 [![guidelines](https://tether.github.io/contribution-guide/badge-guidelines.svg)](https://github.com/tether/contribution-guide)

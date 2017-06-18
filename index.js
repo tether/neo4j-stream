@@ -29,7 +29,7 @@ module.exports = function (driver, objectMode) {
       .run(compose(chunks, data))
       .subscribe({
         onNext(data) {
-          const record = dat.get(0)
+          const record = data.get(0)
           delete record['identity']
           stream.push(objectMode
             ? record

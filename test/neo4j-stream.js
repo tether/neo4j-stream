@@ -104,9 +104,9 @@ test('should stream statement results', assert => {
           return {
             subscribe(obj) {
               setTimeout(() => {
-                obj.onNext('hello ')
+                obj.onNext(record('hello '))
                 setTimeout(() => {
-                  obj.onNext('world')
+                  obj.onNext(record('world'))
                   obj.onCompleted()
                 }, 500)
               }, 500)
@@ -120,9 +120,18 @@ test('should stream statement results', assert => {
   })
   cypher`MATCH (n) RETURN n`
     .pipe(concat(data => {
-      assert.equal(data, 'hello world')
+      assert.equal(data.toString(), '"hello "\n"world"\n')
     }))
 })
+
+function record (str) {
+  return {
+    identity: 1,
+    get() {
+      return str
+    }
+  }
+}
 
 // test('should emit error on session error', assert => {
 //   assert.plan(1)

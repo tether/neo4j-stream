@@ -21,6 +21,18 @@ cypher`
 
 A session should be created from the official [neo4j javascript driver](https://github.com/neo4j/neo4j-javascript-driver).
 
+
+## Installation
+
+```shell
+npm install neo4j-stream --save
+```
+
+[![NPM](https://nodei.co/npm/neo4j-stream.png)](https://nodei.co/npm/neo4j-stream/)
+
+
+## Features
+
 Using [json-to-cypher](https://github.com/bredele/json-to-cypher), this module also allows you to quickly create cypher properties from JavaScript objects or primitives.
 
 ```js
@@ -40,14 +52,6 @@ cypher`
   CREATE (people:PEOPLE {name: ${name}})
 `
 ```
-
-## Installation
-
-```shell
-npm install neo4j-stream --save
-```
-
-[![NPM](https://nodei.co/npm/neo4j-stream.png)](https://nodei.co/npm/neo4j-stream/)
 
 
 ## Question

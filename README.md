@@ -5,7 +5,11 @@
 [![Downloads](https://img.shields.io/npm/dm/neo4j-stream.svg)](http://npm-stat.com/charts.html?package=neo4j-stream)
 [![guidelines](https://tether.github.io/contribution-guide/badge-guidelines.svg)](https://github.com/tether/contribution-guide)
 
-Create a json [line delimited](https://en.wikipedia.org/wiki/JSON_Streaming#Line_delimited_JSON) stream from records returned by cypher query.
+[Neo4j cypher](https://neo4j.com/developer/cypher/) query engine done the right way:
+  * **Multiline**: Create multiline queries to return the data you just need.
+  * **Stream**: Create a json [line delimited](https://en.wikipedia.org/wiki/JSON_Streaming#Line_delimited_JSON) from records returned by cypher query.
+  * **Properties interpolation**: Automatically interpolate JavaScript objects or primitives to create cypher properties.
+
 
 ## Usage
 
@@ -13,9 +17,14 @@ Create a json [line delimited](https://en.wikipedia.org/wiki/JSON_Streaming#Line
 // initialize cypher with a driver session
 const cypher = require('neo4j-stream')(session)
 
+const john = {
+  name: 'John',
+  age: 30
+}
+
 cypher`
-  MATCH (people:PEOPLE)
-  RETURN people
+  CREATE (john:PEOPLE ${john})
+  RETURN john
 `.pipe(dest)
 ```
 
@@ -29,29 +38,6 @@ npm install neo4j-stream --save
 ```
 
 [![NPM](https://nodei.co/npm/neo4j-stream.png)](https://nodei.co/npm/neo4j-stream/)
-
-
-## Features
-
-Using [json-to-cypher](https://github.com/bredele/json-to-cypher), this module also allows you to quickly create cypher properties from JavaScript objects or primitives.
-
-```js
-const name = 'John'
-const john = {
-  name: name,
-  age: 30
-}
-
-// create properties from object
-cypher`
-  CREATE (people:PEOPLE ${john})
-`
-
-// create properties from primitives
-cypher`
-  CREATE (people:PEOPLE {name: ${name}})
-`
-```
 
 
 ## Question

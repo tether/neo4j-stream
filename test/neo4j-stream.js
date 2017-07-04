@@ -179,7 +179,7 @@ test('should serialize cypher properties automatically', assert => {
 })
 
 
-test('should serialize primitives', assert => {
+test('should serialize properties primitives', assert => {
   assert.plan(1)
   const name = 'Olivier'
   const age = 30

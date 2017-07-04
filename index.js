@@ -62,10 +62,18 @@ function compose (chunks, data) {
   let result = ''
   data.map((item, idx) => {
     result += chunks[idx]
+    const value = result ? primitives(item) : item
     result += typeof item === 'object'
       ? serialize(item)
-      : item
+      : value
   })
   result += chunks.slice(-1)
   return result
+}
+
+
+function primitives (arg) {
+  return typeof arg === 'string'
+   ? `"${arg}"`
+   : arg
 }

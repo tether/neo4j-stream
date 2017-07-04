@@ -187,7 +187,7 @@ test('should serialize primitives', assert => {
     session () {
       return {
         run(str) {
-          assert.equal(str, 'MATCH (n:PEOPLE {name:"Olivier", age: 30}) RETURN n')
+          assert.equal(str, 'MATCH (n:PEOPLE {name:"Olivier", age:30}) RETURN n')
           return {
             subscribe() {
 
@@ -197,5 +197,5 @@ test('should serialize primitives', assert => {
       }
     }
   })
-  cypher`MATCH (n:PEOPLE {name: ${name}, age: ${age}}) RETURN n`
+  cypher`MATCH (n:PEOPLE {name:${name}, age:${age}}) RETURN n`
 })

@@ -177,3 +177,25 @@ test('should serialize cypher properties automatically', assert => {
   })
   cypher`MATCH (n:PEOPLE ${properties}) RETURN n`
 })
+
+
+test('should serialize primitives', assert => {
+  assert.plan(1)
+  const name = 'Olivier'
+  const age = 30
+  const cypher = stream({
+    session () {
+      return {
+        run(str) {
+          assert.equal(str, 'MATCH (n:PEOPLE {name:"Olivier", age: 30}) RETURN n')
+          return {
+            subscribe() {
+
+            }
+          }
+        }
+      }
+    }
+  })
+  cypher`MATCH (n:PEOPLE {name: ${name}, age: ${age}}) RETURN n`
+})

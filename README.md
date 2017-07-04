@@ -5,7 +5,7 @@
 [![Downloads](https://img.shields.io/npm/dm/neo4j-stream.svg)](http://npm-stat.com/charts.html?package=neo4j-stream)
 [![guidelines](https://tether.github.io/contribution-guide/badge-guidelines.svg)](https://github.com/tether/contribution-guide)
 
-Create a readable stream from records returned by cypher query.
+Create a json [line delimited](https://en.wikipedia.org/wiki/JSON_Streaming#Line_delimited_JSON) stream from records returned by cypher query.
 
 ## Usage
 

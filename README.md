@@ -7,7 +7,7 @@
 
 [Neo4j cypher](https://neo4j.com/developer/cypher/) query engine done the right way:
   * **Multiline**: Create multiline queries to return the data you just need.
-  * **Stream**: Create a json [line delimited](https://en.wikipedia.org/wiki/JSON_Streaming#Line_delimited_JSON) from records returned by cypher query.
+  * **Stream**: Create a json [line delimited](https://en.wikipedia.org/wiki/JSON_Streaming#Line_delimited_JSON) stream from records returned by cypher query. Don't wait to get all the results to start pushing data to the client.
   * **Properties interpolation**: Automatically interpolate JavaScript objects or primitives to create cypher properties.
 
 

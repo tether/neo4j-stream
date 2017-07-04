@@ -21,6 +21,26 @@ cypher`
 
 A session should be created from the official [neo4j javascript driver](https://github.com/neo4j/neo4j-javascript-driver).
 
+Using [json-to-cypher](https://github.com/bredele/json-to-cypher), this module also allows you to quickly create cypher properties from JavaScript objects or primitives.
+
+```js
+const name = 'John'
+const john = {
+  name: name,
+  age: 30
+}
+
+// create properties from object
+cypher`
+  CREATE (people:PEOPLE ${john})
+`
+
+// create properties from primitives
+cypher`
+  CREATE (people:PEOPLE {name: ${name}})
+`
+```
+
 ## Installation
 
 ```shell

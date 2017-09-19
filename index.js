@@ -29,12 +29,14 @@ module.exports = function (driver, objectMode) {
       .run(compose(chunks, data))
       .subscribe({
         onNext(data) {
-          const record = data.get(0)
-          delete record['identity']
-          stream.push(objectMode
-            ? record
-            : JSON.stringify(record) + '\n'
-          )
+          data.keys.map((key, idx) => {
+            const record = data.get(idx)
+            delete record['identity']
+            stream.push(objectMode
+              ? record
+              : JSON.stringify(record) + '\n'
+            )
+          })
         },
         onCompleted() {
           stream.push(null)

@@ -127,6 +127,7 @@ test('should stream statement results', assert => {
 function record (str) {
   return {
     identity: 1,
+    keys: ['something'],
     get() {
       return str
     }

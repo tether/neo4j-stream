@@ -1,7 +1,7 @@
 {
   "name": "neo4j-stream",
-  "version": "2.2.0",
-  "description": "",
+  "version": "2.2.1",
+  "description": "Stream neo4j queries",
   "main": "index.js",
   "scripts": {
     "test": "tape test/*.js"
@@ -16,7 +16,7 @@
     "stream",
     "tether"
   ],
-  "author": "Olivier Wietrich",
+  "author": "Olivier Wietrich, Petrofeed Inc",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tether/neo4j-stream/issues"

@@ -28,7 +28,7 @@ module.exports = function (driver, objectMode) {
       .run(compose([].concat(chunks), data))
       .subscribe({
         onNext(data) {
-          stream.push(JSON.stringify(data))
+          stream.push(JSON.stringify(data) + '\n')
         },
         onCompleted() {
           stream.push(null)

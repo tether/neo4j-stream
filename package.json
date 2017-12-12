@@ -1,6 +1,6 @@
 {
   "name": "neo4j-stream",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Stream neo4j queries",
   "main": "index.js",
   "scripts": {

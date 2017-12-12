@@ -95,34 +95,6 @@ test('should return a readable stream', assert => {
   assert.equal(result.readable, true)
 })
 
-test('should stream statement results', assert => {
-  assert.plan(1)
-  const cypher = stream({
-    session () {
-      return {
-        run() {
-          return {
-            subscribe(obj) {
-              setTimeout(() => {
-                obj.onNext(record('hello '))
-                setTimeout(() => {
-                  obj.onNext(record('world'))
-                  obj.onCompleted()
-                }, 500)
-              }, 500)
-            }
-          }
-        },
-
-        close() {}
-      }
-    }
-  })
-  cypher`MATCH (n) RETURN n`
-    .pipe(concat(data => {
-      assert.equal(data.toString(), '"hello "\n"world"\n')
-    }))
-})
 
 function record (str) {
   return {
@@ -155,48 +127,3 @@ function record (str) {
 //     assert.equal(error, 'fail!')
 //   })
 // })
-
-
-test('should serialize cypher properties automatically', assert => {
-  assert.plan(1)
-  const properties = {
-    name: 'foo'
-  }
-  const cypher = stream({
-    session () {
-      return {
-        run(str) {
-          assert.equal(str, 'MATCH (n:PEOPLE {name:"foo"}) RETURN n')
-          return {
-            subscribe() {
-
-            }
-          }
-        }
-      }
-    }
-  })
-  cypher`MATCH (n:PEOPLE ${properties}) RETURN n`
-})
-
-
-test('should serialize properties primitives', assert => {
-  assert.plan(1)
-  const name = 'Olivier'
-  const age = 30
-  const cypher = stream({
-    session () {
-      return {
-        run(str) {
-          assert.equal(str, 'MATCH (n:PEOPLE {name:"Olivier", age:30}) RETURN n')
-          return {
-            subscribe() {
-
-            }
-          }
-        }
-      }
-    }
-  })
-  cypher`MATCH (n:PEOPLE {name:${name}, age:${age}}) RETURN n`
-})

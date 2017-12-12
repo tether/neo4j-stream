@@ -1,6 +1,6 @@
 {
   "name": "neo4j-stream",
-  "version": "2.2.1",
+  "version": "3.0.0",
   "description": "Stream neo4j queries",
   "main": "index.js",
   "scripts": {
@@ -27,7 +27,6 @@
     "tape": "*"
   },
   "dependencies": {
-    "json-to-cypher": "^1.0.0",
     "readable-stream": "^2.2.11"
   }
 }

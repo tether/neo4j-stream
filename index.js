@@ -3,7 +3,6 @@
  */
 
 const Readable = require('readable-stream').Readable
-const serialize = require('json-to-cypher')
 
 
 /**
@@ -26,17 +25,10 @@ module.exports = function (driver, objectMode) {
     const stream = Readable()
     stream._read = () => {}
     session
-      .run(compose(chunks, data))
+      .run(compose([].concat(chunks), data))
       .subscribe({
         onNext(data) {
-          data.keys.map((key, idx) => {
-            const record = data.get(idx)
-            delete record['identity']
-            stream.push(objectMode
-              ? record
-              : JSON.stringify(record) + '\n'
-            )
-          })
+          stream.push(JSON.stringify(data))
         },
         onCompleted() {
           stream.push(null)
@@ -62,20 +54,8 @@ module.exports = function (driver, objectMode) {
 
 function compose (chunks, data) {
   let result = ''
-  data.map((item, idx) => {
-    result += chunks[idx]
-    const value = result ? primitives(item) : item
-    result += typeof item === 'object'
-      ? serialize(item)
-      : value
+  chunks.map((chunk, idx) => {
+    result += chunk + (data[idx] || '')
   })
-  result += chunks.slice(-1)
   return result
-}
-
-
-function primitives (arg) {
-  return typeof arg === 'string'
-   ? `"${arg}"`
-   : arg
 }
